@@ -36,4 +36,12 @@ public final class OI {
   public static boolean getB() {
     return primaryController.getBButton();
   }
+
+  public static boolean getLeftBumper() {
+    return primaryController.getLeftBumper();
+  }
+
+  public static boolean getRightBumper() {
+    return primaryController.getRightBumper();
+  }
 }

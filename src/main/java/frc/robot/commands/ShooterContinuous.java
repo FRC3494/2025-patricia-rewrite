@@ -7,6 +7,8 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterContinuous extends Command {
   Shooter shooter;
+  double topSpeed = Constants.Shooter.shooterTopSpeed;
+  double bottomSpeed = Constants.Shooter.shooterBottomSpeed;
 
   public ShooterContinuous(Shooter shooter) {
     this.shooter = shooter;
@@ -18,10 +20,37 @@ public class ShooterContinuous extends Command {
   }
 
   public void execute() {
+    if (OI.getLeftBumper()) {
+      topSpeed -= Constants.Shooter.speedAdjustStep;
+      bottomSpeed -= Constants.Shooter.speedAdjustStep;
+    } else if (OI.getRightBumper()) {
+      topSpeed += Constants.Shooter.speedAdjustStep;
+      bottomSpeed += Constants.Shooter.speedAdjustStep;
+    }
+
+    if (topSpeed > 1) {
+      topSpeed = 1;
+    }
+    if (bottomSpeed > 1) {
+      bottomSpeed = 1;
+    }
+    if (topSpeed < -1) {
+      topSpeed = -1;
+    }
+    if (bottomSpeed < -1) {
+      bottomSpeed = -1;
+    }
+
+    System.out.println("Top Roller: " + topSpeed);
+    System.out.println("Bottom Roller: " + bottomSpeed);
+    System.out.println("");
+
     if (OI.getB()) {
-      shooter.setSpeed(Constants.Shooter.shooterSpeed);
+      shooter.setTopSpeed(topSpeed);
+      shooter.setBottomSpeed(bottomSpeed);
     } else {
-      shooter.setSpeed(0);
+      shooter.setTopSpeed(0);
+      shooter.setBottomSpeed(0);
     }
   }
 
@@ -30,7 +59,8 @@ public class ShooterContinuous extends Command {
   }
 
   public void end() {
-    shooter.setSpeed(0);
+    shooter.setTopSpeed(0);
+    shooter.setBottomSpeed(0);
   }
 
   public void interrupted() {

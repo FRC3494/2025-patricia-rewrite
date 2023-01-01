@@ -13,8 +13,10 @@ public class Shooter extends SubsystemBase {
     backWheelMotor = new Talon(Constants.Shooter.backWheelMotor);
   }
 
-  public void setSpeed(double speed) {
-    frontWheelMotor.set(speed);
+  public void setTopSpeed(double speed) {
     backWheelMotor.set(speed);
+  }
+  public void setBottomSpeed(double speed) {
+    frontWheelMotor.set(speed);
   }
 }

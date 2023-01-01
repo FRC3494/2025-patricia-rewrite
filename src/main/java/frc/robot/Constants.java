@@ -48,6 +48,9 @@ public final class Constants {
     public static final int frontWheelMotor = 2;
     public static final int backWheelMotor = 3;
 
-    public static final double shooterSpeed = 0.7;
+    public static final double shooterTopSpeed = 0.25;
+    public static final double shooterBottomSpeed = 0.25;
+
+    public static final double speedAdjustStep = 0.01;
   }
 }
