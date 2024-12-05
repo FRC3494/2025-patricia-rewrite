@@ -9,7 +9,15 @@ public class Drivetrain extends SubsystemBase {
   Talon rightMotor;
 
   public Drivetrain() {
-    leftMotor = new Talon(Constants.Drivetrain.leftMotor);
-    rightMotor = new Talon(Constants.Drivetrain.rightMotor);
+    leftMotor = new Talon(Constants.Drive.leftMotor);
+    rightMotor = new Talon(Constants.Drive.rightMotor);
+  }
+
+  public void setLeftMotor(double speed) {
+    leftMotor.set(speed);
+  }
+
+  public void setRightMotor(double speed) {
+    rightMotor.set(speed);
   }
 }

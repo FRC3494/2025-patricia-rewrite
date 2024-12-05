@@ -10,4 +10,12 @@ public final class OI {
   public static XboxController getPrimaryController() {
     return primaryController;
   }
+
+  public static double getLeftJoystickY() {
+    return primaryController.getLeftY();
+  }
+
+  public static double getRightJoystickX() {
+    return primaryController.getRightX();
+  }
 }

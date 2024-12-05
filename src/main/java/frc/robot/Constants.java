@@ -21,8 +21,13 @@ public final class Constants {
     public static final int PRIMARY_CONTROLLER_PORT = 0;
   }
 
-  public static final class Drivetrain {
+  public static final class Drive {
     public static final int rightMotor = 1;
     public static final int leftMotor = 0;
+
+    public static final double deadband = 0.05;
+
+    public static final double driveFactor = 1.2;
+    public static final double turnFactor = 0.8;
   }
 }
