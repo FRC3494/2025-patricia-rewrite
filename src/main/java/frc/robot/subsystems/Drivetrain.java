@@ -18,6 +18,6 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void setRightMotor(double speed) {
-    rightMotor.set(speed);
+    rightMotor.set(-1 * speed);
   }
 }
