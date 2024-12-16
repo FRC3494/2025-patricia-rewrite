@@ -18,19 +18,8 @@ public class DriveContinuous extends Command {
   }
 
   public void execute() {
-    double leftY = -1 * OI.getLeftJoystickY();
-    double rightX = OI.getRightJoystickX();
-    if (Math.abs(leftY) < Constants.Drive.deadband) {
-      leftY = 0;
-    }
-    if (Math.abs(rightX) < Constants.Drive.deadband) {
-      rightX = 0;
-    }
-
-    System.out.println((Constants.Drive.driveFactor * leftY + Constants.Drive.turnFactor * rightX)
-        / Constants.Drive.driveFactor);
-    System.out.println((Constants.Drive.driveFactor * leftY + (-1 * Constants.Drive.turnFactor * rightX))
-        / Constants.Drive.driveFactor);
+    double leftY = OI.deadband(-1 * OI.getLeftJoystickY(), Constants.Drive.deadband);
+    double rightX = OI.deadband(OI.getRightJoystickX(), Constants.Drive.deadband);
 
     drivetrain.setLeftMotor((Constants.Drive.driveFactor * leftY + Constants.Drive.turnFactor * rightX)
         / Constants.Drive.driveFactor);

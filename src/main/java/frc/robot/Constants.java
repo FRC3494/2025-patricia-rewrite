@@ -30,4 +30,24 @@ public final class Constants {
     public static final double driveFactor = 1.2;
     public static final double turnFactor = 0.8;
   }
+
+  public static final class Magazine {
+    public static final int frontMotor = 4;
+    public static final int backMotor = 6;
+
+    public static final double magazineSpeed = 0.5;
+  }
+
+  public static final class Intake {
+    public static final int intakeMotor = 5;
+
+    public static final double intakeSpeed = 0.5;
+  }
+
+  public static final class Shooter {
+    public static final int frontWheelMotor = 2;
+    public static final int backWheelMotor = 3;
+
+    public static final double shooterSpeed = 0.7;
+  }
 }

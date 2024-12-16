@@ -20,6 +20,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private Command m_driveContinuous;
+  private Command m_magazineContinuous;
+  private Command m_intakeContinuous;
+  private Command m_shooterContinuous;
 
   private RobotContainer m_robotContainer;
 
@@ -73,7 +76,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -99,6 +102,21 @@ public class Robot extends TimedRobot {
     m_driveContinuous = m_robotContainer.getDriveContinuous();
     if (m_driveContinuous != null) {
       m_driveContinuous.schedule();
+    }
+
+    m_magazineContinuous = m_robotContainer.getMagazineContinuous();
+    if (m_magazineContinuous != null) {
+      m_magazineContinuous.schedule();
+    }
+
+    m_intakeContinuous = m_robotContainer.getIntakeContinuous();
+    if (m_intakeContinuous != null) {
+      m_intakeContinuous.schedule();
+    }
+
+    m_shooterContinuous = m_robotContainer.getShooterContinuous();
+    if (m_shooterContinuous != null) {
+      m_shooterContinuous.schedule();
     }
   }
 

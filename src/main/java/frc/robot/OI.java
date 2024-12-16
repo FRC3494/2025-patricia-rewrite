@@ -1,10 +1,20 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.event.EventLoop;
 
 public final class OI {
-  private static EventLoop eventLoop = new EventLoop();
+  public static double deadband(double value, double deadband) {
+    if (Math.abs(value) > deadband) {
+      if (value > 0.0) {
+        return (value - deadband) / (1.0 - deadband);
+      } else {
+        return (value + deadband) / (1.0 - deadband);
+      }
+    } else {
+      return 0.0;
+    }
+  }
+
   private static XboxController primaryController = new XboxController(Constants.OI.PRIMARY_CONTROLLER_PORT);
 
   public static XboxController getPrimaryController() {
@@ -17,5 +27,13 @@ public final class OI {
 
   public static double getRightJoystickX() {
     return primaryController.getRightX();
+  }
+
+  public static boolean getA() {
+    return primaryController.getAButton();
+  }
+
+  public static boolean getB() {
+    return primaryController.getBButton();
   }
 }

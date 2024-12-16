@@ -7,10 +7,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.Autos;
 import frc.robot.commands.DriveContinuous;
+import frc.robot.commands.IntakeContinuous;
+import frc.robot.commands.MagazineContinuous;
+import frc.robot.commands.ShooterContinuous;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Magazine;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -23,10 +27,18 @@ import frc.robot.subsystems.ExampleSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Drivetrain m_drivetrain = new Drivetrain();
-
   private final DriveContinuous m_driveContinuous = new DriveContinuous(m_drivetrain);
+
+  private final Magazine m_magazine = new Magazine();
+  private final MagazineContinuous m_magazineContinuous = new MagazineContinuous(m_magazine);
+
+  private final Intake m_intake = new Intake();
+  private final IntakeContinuous m_intakeContinuous = new IntakeContinuous(m_intake);
+
+  private final Shooter m_shooter = new Shooter();
+  private final ShooterContinuous m_shooterContinuous = new ShooterContinuous(m_shooter);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -58,12 +70,24 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
-  }
+  // public Command getAutonomousCommand() {
+  // // An example command will be run in autonomous
+  // return Autos.exampleAuto(m_exampleSubsystem);
+  // }
 
   public Command getDriveContinuous() {
     return m_driveContinuous;
+  }
+
+  public Command getMagazineContinuous() {
+    return m_magazineContinuous;
+  }
+
+  public Command getIntakeContinuous() {
+    return m_intakeContinuous;
+  }
+
+  public Command getShooterContinuous() {
+    return m_shooterContinuous;
   }
 }
