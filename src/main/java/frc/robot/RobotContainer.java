@@ -4,7 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.DriveContinuous;
@@ -40,12 +43,35 @@ public class RobotContainer {
   private final Shooter m_shooter = new Shooter();
   private final ShooterContinuous m_shooterContinuous = new ShooterContinuous(m_shooter);
 
+  private final Command m_DefaultAuto = new StartEndCommand(
+      () -> {
+        m_shooter.setBottomSpeed(0.2);
+        m_shooter.setTopSpeed(0.2);
+      },
+      () -> {
+        m_shooter.setBottomSpeed(0);
+        m_shooter.setTopSpeed(0);
+      },
+      m_shooter);
+  private final Command m_AltAuto = new StartEndCommand(
+      () -> {
+        m_magazine.setSpeed(0.5);
+      },
+      () -> {
+        m_magazine.setSpeed(0);
+      }, m_magazine);
+  private final SendableChooser<Command> m_chooser = new SendableChooser<>();
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+
+    m_chooser.setDefaultOption("DefaultAuto", m_DefaultAuto);
+    m_chooser.addOption("AltAuto", m_AltAuto);
+    SmartDashboard.putData(m_chooser);
   }
 
   /**
@@ -89,5 +115,9 @@ public class RobotContainer {
 
   public Command getShooterContinuous() {
     return m_shooterContinuous;
+  }
+
+  public Command getAutonomousCommand() {
+    return m_chooser.getSelected();
   }
 }
