@@ -26,7 +26,11 @@ public final class OI {
   }
 
   public static double getRightJoystickX() {
-    return primaryController.getRightX();
+    // For Logitech ATK3
+    return primaryController.getLeftX();
+
+    // For XBox controller
+    // return primaryController.getRightX();
   }
 
   public static boolean getA() {

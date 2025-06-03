@@ -41,6 +41,7 @@ public class ShooterContinuous extends Command {
       bottomSpeed = -1;
     }
 
+    // TODO: add AKit dep and change to Logger
     System.out.println("Top Roller: " + topSpeed);
     System.out.println("Bottom Roller: " + bottomSpeed);
     System.out.println("");
