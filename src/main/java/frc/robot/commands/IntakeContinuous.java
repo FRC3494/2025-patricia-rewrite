@@ -18,8 +18,10 @@ public class IntakeContinuous extends Command {
   }
 
   public void execute() {
-    if (OI.getA()) {
+    if (OI.intakeAndMagazine()) {
       intake.setSpeed(Constants.Intake.intakeSpeed);
+    } else if (OI.reverseIntakeAndMagazine()) {
+      intake.setSpeed(-Constants.Intake.intakeSpeed);
     } else {
       intake.setSpeed(0);
     }

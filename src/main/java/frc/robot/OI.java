@@ -33,19 +33,31 @@ public final class OI {
     // return primaryController.getRightX();
   }
 
-  public static boolean getA() {
-    return primaryController.getAButton();
+  public static boolean intakeAndMagazine() {
+    return primaryController.getLeftTriggerAxis() > 0.05;
   }
 
-  public static boolean getB() {
-    return primaryController.getBButton();
-  }
-
-  public static boolean getLeftBumper() {
+  public static boolean reverseIntakeAndMagazine() {
     return primaryController.getLeftBumper();
   }
 
-  public static boolean getRightBumper() {
-    return primaryController.getRightBumper();
+  public static double shooterSpeed() {
+    return deadband(primaryController.getRightTriggerAxis(), 0.05);
   }
+
+  public static boolean mediumShooter() {
+    return primaryController.getAButton();
+  }
+
+  public static boolean fastShooter() {
+    return primaryController.getBButton();
+  }
+
+  // public static boolean decreaseShooterSpeed() {
+  // return primaryController.getLeftBumper();
+  // }
+
+  // public static boolean increaseShooterSpeed() {
+  // return primaryController.getRightBumper();
+  // }
 }

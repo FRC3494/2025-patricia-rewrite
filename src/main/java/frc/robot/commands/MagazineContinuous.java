@@ -18,8 +18,10 @@ public class MagazineContinuous extends Command {
   }
 
   public void execute() {
-    if (OI.getA()) {
+    if (OI.intakeAndMagazine()) {
       magazine.setSpeed(Constants.Magazine.magazineSpeed);
+    } else if (OI.reverseIntakeAndMagazine()) {
+      magazine.setSpeed(-Constants.Magazine.magazineSpeed);
     } else {
       magazine.setSpeed(0);
     }

@@ -7,8 +7,6 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterContinuous extends Command {
   Shooter shooter;
-  double topSpeed = Constants.Shooter.shooterTopSpeed;
-  double bottomSpeed = Constants.Shooter.shooterBottomSpeed;
 
   public ShooterContinuous(Shooter shooter) {
     this.shooter = shooter;
@@ -20,35 +18,43 @@ public class ShooterContinuous extends Command {
   }
 
   public void execute() {
-    if (OI.getLeftBumper()) {
-      topSpeed -= Constants.Shooter.speedAdjustStep;
-      bottomSpeed -= Constants.Shooter.speedAdjustStep;
-    } else if (OI.getRightBumper()) {
-      topSpeed += Constants.Shooter.speedAdjustStep;
-      bottomSpeed += Constants.Shooter.speedAdjustStep;
-    }
+    // if (OI.decreaseShooterSpeed()) {
+    // topSpeed -= Constants.Shooter.speedAdjustStep;
+    // bottomSpeed -= Constants.Shooter.speedAdjustStep;
+    // } else if (OI.increaseShooterSpeed()) {
+    // topSpeed += Constants.Shooter.speedAdjustStep;
+    // bottomSpeed += Constants.Shooter.speedAdjustStep;
+    // }
 
-    if (topSpeed > 1) {
-      topSpeed = 1;
-    }
-    if (bottomSpeed > 1) {
-      bottomSpeed = 1;
-    }
-    if (topSpeed < -1) {
-      topSpeed = -1;
-    }
-    if (bottomSpeed < -1) {
-      bottomSpeed = -1;
-    }
+    // if (topSpeed > 1) {
+    // topSpeed = 1;
+    // }
+    // if (bottomSpeed > 1) {
+    // bottomSpeed = 1;
+    // }
+    // if (topSpeed < -1) {
+    // topSpeed = -1;
+    // }
+    // if (bottomSpeed < -1) {
+    // bottomSpeed = -1;
+    // }
 
-    // TODO: add AKit dep and change to Logger
-    System.out.println("Top Roller: " + topSpeed);
-    System.out.println("Bottom Roller: " + bottomSpeed);
-    System.out.println("");
+    // // TODO: add AKit dep and change to Logger
+    // System.out.println("Top Roller: " + topSpeed);
+    // System.out.println("Bottom Roller: " + bottomSpeed);
+    // System.out.println("");
 
-    if (OI.getB()) {
-      shooter.setTopSpeed(topSpeed);
-      shooter.setBottomSpeed(bottomSpeed);
+    if (OI.shooterSpeed() > 0) {
+      if (OI.mediumShooter()) {
+        shooter.setTopSpeed(Constants.Shooter.shooterMaxSpeedMedium * OI.shooterSpeed());
+        shooter.setBottomSpeed(Constants.Shooter.shooterMaxSpeedMedium * OI.shooterSpeed());
+      } else if (OI.fastShooter()) {
+        shooter.setTopSpeed(Constants.Shooter.shooterMaxSpeedFast * OI.shooterSpeed());
+        shooter.setBottomSpeed(Constants.Shooter.shooterMaxSpeedFast * OI.shooterSpeed());
+      } else {
+        shooter.setTopSpeed(Constants.Shooter.shooterMaxSpeedNormal * OI.shooterSpeed());
+        shooter.setBottomSpeed(Constants.Shooter.shooterMaxSpeedNormal * OI.shooterSpeed());
+      }
     } else {
       shooter.setTopSpeed(0);
       shooter.setBottomSpeed(0);
