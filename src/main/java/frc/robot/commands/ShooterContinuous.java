@@ -7,6 +7,8 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterContinuous extends Command {
   Shooter shooter;
+  double topSpeed = 0;
+  double bottomSpeed = 0;
 
   public ShooterContinuous(Shooter shooter) {
     this.shooter = shooter;
@@ -44,21 +46,26 @@ public class ShooterContinuous extends Command {
     // System.out.println("Bottom Roller: " + bottomSpeed);
     // System.out.println("");
 
-    if (OI.shooterSpeed() > 0) {
-      if (OI.mediumShooter()) {
-        shooter.setTopSpeed(Constants.Shooter.shooterMaxSpeedMedium * OI.shooterSpeed());
-        shooter.setBottomSpeed(Constants.Shooter.shooterMaxSpeedMedium * OI.shooterSpeed());
-      } else if (OI.fastShooter()) {
-        shooter.setTopSpeed(Constants.Shooter.shooterMaxSpeedFast * OI.shooterSpeed());
-        shooter.setBottomSpeed(Constants.Shooter.shooterMaxSpeedFast * OI.shooterSpeed());
-      } else {
-        shooter.setTopSpeed(Constants.Shooter.shooterMaxSpeedNormal * OI.shooterSpeed());
-        shooter.setBottomSpeed(Constants.Shooter.shooterMaxSpeedNormal * OI.shooterSpeed());
-      }
+    if (OI.mediumShooter()) {
+      topSpeed = Constants.Shooter.shooterMaxSpeedMedium;
+      bottomSpeed = Constants.Shooter.shooterMaxSpeedMedium;
+    } else if (OI.fastShooter()) {
+      topSpeed = Constants.Shooter.shooterMaxSpeedFast;
+      bottomSpeed = Constants.Shooter.shooterMaxSpeedFast;
     } else {
-      shooter.setTopSpeed(0);
-      shooter.setBottomSpeed(0);
+      topSpeed = Constants.Shooter.shooterMaxSpeedNormal;
+      bottomSpeed = Constants.Shooter.shooterMaxSpeedNormal;
     }
+
+    topSpeed *= OI.shooterSpeed();
+    bottomSpeed *= OI.shooterSpeed();
+
+    if (OI.differentialShooterSpeeds()) {
+      bottomSpeed *= Constants.Shooter.bottomSpeedRatio;
+    }
+
+    shooter.setTopSpeed(topSpeed);
+    shooter.setBottomSpeed(bottomSpeed);
   }
 
   public boolean isFinished() {

@@ -52,6 +52,8 @@ public final class Constants {
     public static final double shooterMaxSpeedMedium = 0.6;
     public static final double shooterMaxSpeedFast = 1;
 
+    public static final double bottomSpeedRatio = 0.3;
+
     public static final double speedAdjustStep = 0.01;
   }
 }

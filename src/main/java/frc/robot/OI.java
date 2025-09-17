@@ -53,6 +53,10 @@ public final class OI {
     return primaryController.getBButton();
   }
 
+  public static boolean differentialShooterSpeeds() {
+    return primaryController.getYButton();
+  }
+
   // public static boolean decreaseShooterSpeed() {
   // return primaryController.getLeftBumper();
   // }
